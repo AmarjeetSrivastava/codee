@@ -1,9 +1,9 @@
 import 'dart:convert';
-import 'package:http/http.dart' as http;
-import 'package:aara_task/models/product_model.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:http/http.dart' as http;
+import 'package:aara_task/models/product_model.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -23,14 +23,14 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   loadData() async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
     // final catalogJson =
     //     await rootBundle.loadString("assets/files/catalog.json");
 
     final response = await http.get(Uri.parse(url));
     final catalogJson = response.body;
     final decodedData = jsonDecode(catalogJson);
-    var productsData = decodedData["TopCategoryId"];
+    var productsData = decodedData["products"];
     CatalogModel.items = List.from(productsData)
         .map<Item>((item) => Item.fromMap(item))
         .toList();
@@ -106,14 +106,66 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: SafeArea(
         child: GridView.builder(
+            padding: EdgeInsets.all(30),
             itemCount: CatalogModel.items.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
+              mainAxisSpacing: 30,
+              crossAxisSpacing: 30,
             ),
             itemBuilder: (context, index) {
-              return ElevatedButton(
-                child: Text(""),
-                onPressed: () {},
+              final catalog = CatalogModel.items[index];
+              return SizedBox(
+                child: MaterialButton(
+                  color: Colors.white,
+                  elevation: 7,
+                  onPressed: () {},
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      right: 0,
+                      left: 0,
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.network(
+                              catalog.image,
+                              height: 90,
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(catalog.name),
+                                Text(
+                                  "short description",
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Icon(Icons.favorite),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("100"),
+                            Text("100"),
+                            Icon(Icons.shopping_cart),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               );
             }),
       ),

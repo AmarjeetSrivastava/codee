@@ -1,11 +1,9 @@
+import 'package:aara_task/screens/logic.dart';
 import 'package:aara_task/screens/home_screen.dart';
-import 'package:aara_task/screens/landing_page.dart';
-import 'package:aara_task/screens/otp_login.dart';
-import 'package:aara_task/screens/register_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -15,7 +13,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LandingPage(),
+      home: HomeScreen(),
+      theme: ThemeData(
+        primarySwatch: Colors.orange,
+      ),
+      routes: {
+        '/login': (context) => LoginPage(),
+        '/register': (context) => RegPage(),
+        '/otp': (context) => OtpPage()
+      },
     );
   }
 }

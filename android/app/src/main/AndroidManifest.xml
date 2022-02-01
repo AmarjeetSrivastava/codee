@@ -1,5 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.aara_task">
+    <uses-permission android:name="android.permission.INTERNET"/>
+
    <application
         android:label="aara_task"
         android:name="${applicationName}"
@@ -30,7 +32,7 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+
     </application>
-    <uses-permission android:name="android.permission.INTERNET"/>
 
 </manifest>
