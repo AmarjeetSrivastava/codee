@@ -4,38 +4,6 @@ import 'package:flutter/material.dart';
 
 final phoneController = TextEditingController();
 
-class HomeDesign extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return new MaterialApp(
-      title: 'Flutter Demo',
-      home: new MyApp(),
-      routes: {
-        '/login': (context) => LoginPage(),
-        '/register': (context) => RegPage(),
-        '/otp': (context) => LoginPage(),
-        '/main': (context) => HomeScreen(),
-      },
-    );
-  }
-}
-
-class OtpApp extends StatelessWidget {
-  const OtpApp({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return OtpPage();
-  }
-}
-
-class RegApp extends StatelessWidget {
-  const RegApp({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return RegPage();
-  }
-}
-
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
