@@ -9,14 +9,14 @@ class CatalogModel {
 }
 
 class Item {
-  final int id;
-  final String name;
-  final String bColor;
-  final String tColor;
-  final String image;
-  final num itemCount;
-  final num numItem;
-  final bool show;
+  final id;
+  final name;
+  final bColor;
+  final tColor;
+  final image;
+  final itemCount;
+  final numItem;
+  final show;
 
   Item({
     required this.tColor,
@@ -67,7 +67,7 @@ class Item {
     return Item(
       id: map["TopCategoryId"],
       name: map["TopCategoryName"],
-      image: map['image'],
+      image: map['Image'],
       bColor: map["BackgroundColor"],
       tColor: map["TextColor"],
       numItem: map["NumberItem"],

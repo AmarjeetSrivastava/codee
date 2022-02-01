@@ -30,10 +30,10 @@ class _HomeScreenState extends State<HomeScreen> {
     final response = await http.get(Uri.parse(url));
     final catalogJson = response.body;
     final decodedData = jsonDecode(catalogJson);
-    var productsData = decodedData["products"];
-    CatalogModel.items = List.from(productsData)
-        .map<Item>((item) => Item.fromMap(item))
-        .toList();
+    final productsData = decodedData[0];
+    final data = productsData["data"];
+    CatalogModel.items =
+        List.from(data).map<Item>((item) => Item.fromMap(item)).toList();
     setState(() {});
   }
 
@@ -117,6 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
               final catalog = CatalogModel.items[index];
               return SizedBox(
                 child: MaterialButton(
+                  height: 300,
                   color: Colors.white,
                   elevation: 7,
                   onPressed: () {},
@@ -131,8 +132,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Image.network(
-                              catalog.image,
-                              height: 90,
+                              catalog.image.toString(),
+                              height: 80,
+                              width: 100,
                             ),
                           ],
                         ),
@@ -142,7 +144,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(catalog.name),
+                                Text(
+                                  catalog.name,
+                                  overflow: TextOverflow.fade,
+                                ),
                                 Text(
                                   "short description",
                                   style: TextStyle(
